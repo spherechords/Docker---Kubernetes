@@ -1,0 +1,70 @@
+How to install Docker on Centos 7:
+==================================
+-- lsb_release --dirc  ## check the version of machine, if command not install 
+-- yum provides */lsb_release
+-- yum install redhat-lsb-core
+
+## Now you get it
+Distributor ID: CentOS
+Description:    CentOS Linux release 7.7.1908 (Core)
+Release:        7.7.1908
+Codename:       Core
+
+-- yum search docker
+-- yum info docker
+## We will go with official one, From Docker repository
+-- sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+-- sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+#For cheking version that installed 
+-- less /etc/yum.repos.d/docker-ce.repo
+
+#Installing Docker
+-- sudo yum install -y docker-ce
+
+#For checking version of docker
+-- rpm -qa | grep docker
+
+-- docker-ce-cli-19.03.8-3.el7.x86_64
+-- docker-ce-19.03.8-3.el7.x86_64
+
+#Checking Information
+-- docker info
+
+Client:
+Debug Mode: false
+Server:
+ERROR: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+errors pretty printing info
+
+#we have to enable the service with systemctl
+-- sudo systemctl enable docker
+
+Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.s
+ervice.
+
+
+-- sudo systemctl start docker
+-- sudo systemctl status docker
+-- docker info
+##check the user
+-- getent group docker
+docker:x:994:
+##check the user
+-- less /etc/passwd
+-- sudo gpasswd -a [user] docker
+-- logout
+
+##login with sudo su -
+-- docker --version
+-- docker info
+
+## IF we remove the docker with depencies 
+--  sudo yum history list
+-- sudo yum history info 2
+-- sudo yum history undo 2
+-- getent group docker
+-- sudo groupdel docker
+-- sudo ls /var/lib/docker
+-- sudo rm-rf /var/lib/docker
+-- lsb_release --dirc
