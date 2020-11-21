@@ -4,6 +4,8 @@ How to install Docker on Centos 7:
 -- yum provides */lsb_release
 -- yum install redhat-lsb-core
 
+
+
 ## Now you get it
 Distributor ID: CentOS
 Description:    CentOS Linux release 7.7.1908 (Core)
